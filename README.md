@@ -12,4 +12,4 @@ This is an MCEdit filter that will count "bytes" of a Minecraft "program" accord
  4. Press run.
  5. Check the MCEdit console. Detailed stats on the composition of the region and the total byte count is shown.
  
-**Suggest features by pinging `@GamrCorps` in [The Nineteenth Byte](http://chat.stackexchange.com/rooms/240/the-nineteenth-byte) or [Mothership](http://chat.stackexchange.com/rooms/31934/mothership) (My development chat).
+**Suggest features by pinging `@GamrCorps` in [The Nineteenth Byte](http://chat.stackexchange.com/rooms/240/the-nineteenth-byte) or [Mothership](http://chat.stackexchange.com/rooms/31934/mothership) (My development chat).**
