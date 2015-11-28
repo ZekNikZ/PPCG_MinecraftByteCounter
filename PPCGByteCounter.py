@@ -1,5 +1,6 @@
 from pymclevel import TAG_Byte, TAG_Short, TAG_Int, TAG_Compound, TAG_List, TAG_String, TAG_Double, TAG_Float
 import operator
+import ctypes
 
 displayName = "PPCG.SE Minecraft Byte Counter"
 
@@ -101,6 +102,7 @@ inputs = [
 ]
 
 def perform(level, box, options):
+    global inputs
     count = {
         "RedstoneDust": 0,
         "Repeater": 0,
@@ -150,79 +152,79 @@ def perform(level, box, options):
                     bytecount += options["Air Block"]
                     count["AirBlock"] += options["Air Block"]
                     blockcount["AirBlock"] += 1
-                if level.blockAt(x,y,z) == ids["BarrierBlock"]:
+                elif level.blockAt(x,y,z) == ids["BarrierBlock"]:
                     bytecount += options["Barrier Block"]
                     count["BarrierBlock"] += options["Barrier Block"]
                     blockcount["BarrierBlock"] += 1
-                if level.blockAt(x,y,z) == ids["RedstoneDust"]:
+                elif level.blockAt(x,y,z) == ids["RedstoneDust"]:
                     bytecount += options["Redstone Dust"]
                     count["RedstoneDust"] += options["Redstone Dust"]
                     blockcount["RedstoneDust"] += 1
-                if level.blockAt(x,y,z) == ids["RepeaterON"]:
+                elif level.blockAt(x,y,z) == ids["RepeaterON"]:
                     bytecount += options["Redstone Repeater"]
                     count["Repeater"] += options["Redstone Repeater"]
                     blockcount["Repeater"] += 1
-                if level.blockAt(x,y,z) == ids["RepeaterOFF"]:
+                elif level.blockAt(x,y,z) == ids["RepeaterOFF"]:
                     bytecount += options["Redstone Repeater"]
                     count["Repeater"] += options["Redstone Repeater"]
                     blockcount["Repeater"] += 1
-                if level.blockAt(x,y,z) == ids["ComparatorON"]:
+                elif level.blockAt(x,y,z) == ids["ComparatorON"]:
                     bytecount += options["Redstone Comparator"]
                     count["Comparator"] += options["Redstone Comparator"]
                     blockcount["Comparator"] += 1
-                if level.blockAt(x,y,z) == ids["ComparatorOFF"]:
+                elif level.blockAt(x,y,z) == ids["ComparatorOFF"]:
                     bytecount += options["Redstone Comparator"]
                     count["Comparator"] += options["Redstone Comparator"]
                     blockcount["Comparator"] += 1
-                if level.blockAt(x,y,z) == ids["NormalPiston"]:
+                elif level.blockAt(x,y,z) == ids["NormalPiston"]:
                     bytecount += options["Piston"]
                     count["NormalPiston"] += options["Piston"]
                     blockcount["NormalPiston"] += 1
-                if level.blockAt(x,y,z) == ids["StickyPiston"]:
+                elif level.blockAt(x,y,z) == ids["StickyPiston"]:
                     bytecount += options["Sticky Piston"]
                     count["StickyPiston"] += options["Sticky Piston"]
                     blockcount["StickyPiston"] += 1
-                if level.blockAt(x,y,z) == ids["ImpulseCommandBlock"]:
+                elif level.blockAt(x,y,z) == ids["ImpulseCommandBlock"]:
                     bytecount += options["Impulse (Normal)"]
                     count["ImpulseCommandBlock"] += options["Impulse (Normal)"]
                     blockcount["ImpulseCommandBlock"] += 1
-                if level.blockAt(x,y,z) == ids["ChainCommandBlock"]:
+                elif level.blockAt(x,y,z) == ids["ChainCommandBlock"]:
                     bytecount += options["Chain"]
                     count["ChainCommandBlock"] += options["Chain"]
                     blockcount["ChainCommandBlock"] += 1
-                if level.blockAt(x,y,z) == ids["RepeatCommandBlock"]:
+                elif level.blockAt(x,y,z) == ids["RepeatCommandBlock"]:
                     bytecount += options["Repeat"]
                     count["RepeatCommandBlock"] += options["Repeat"]
                     blockcount["RepeatCommandBlock"] += 1
-                if level.blockAt(x,y,z) == ids["Lever"]:
+                elif level.blockAt(x,y,z) == ids["Lever"]:
                     bytecount += options["Levers"]
                     count["Levers"] += options["Levers"]
                     blockcount["Levers"] += 1
-                if level.blockAt(x,y,z) == ids["NoteBlock"]:
+                elif level.blockAt(x,y,z) == ids["NoteBlock"]:
                     bytecount += options["Note Block"]
                     count["NoteBlock"] += options["Note Block"]
                     blockcount["NoteBlock"] += 1
-                if level.blockAt(x,y,z) == ids["StoneButton"]:
+                elif level.blockAt(x,y,z) == ids["StoneButton"]:
                     bytecount += options["Button"]
                     count["Button"] += options["Button"]
                     blockcount["Button"] += 1
-                if level.blockAt(x,y,z) == ids["WoodenButton"]:
+                elif level.blockAt(x,y,z) == ids["WoodenButton"]:
                     bytecount += options["Button"]
                     count["Button"] += options["Button"]
                     blockcount["Button"] += 1
-                if level.blockAt(x,y,z) == ids["LampON"]:
+                elif level.blockAt(x,y,z) == ids["LampON"]:
                     bytecount += options["Lamp"]
                     count["Lamp"] += options["Lamp"]
                     blockcount["Lamp"] += 1
-                if level.blockAt(x,y,z) == ids["LampOFF"]:
+                elif level.blockAt(x,y,z) == ids["LampOFF"]:
                     bytecount += options["Lamp"]
                     count["Lamp"] += options["Lamp"]
                     blockcount["Lamp"] += 1
-                if level.blockAt(x,y,z) == ids["TorchOFF"]:
+                elif level.blockAt(x,y,z) == ids["TorchOFF"]:
                     bytecount += options["Torch"]
                     count["Torch"] += options["Torch"]
                     blockcount["Torch"] += 1
-                if level.blockAt(x,y,z) == ids["TorchON"]:
+                elif level.blockAt(x,y,z) == ids["TorchON"]:
                     bytecount += options["Torch"]
                     count["Torch"] += options["Torch"]
                     blockcount["Torch"] += 1
@@ -251,3 +253,5 @@ def perform(level, box, options):
     for key, value in sorted(blockcount.items(), key=operator.itemgetter(1), reverse = True):
         print(key + ":\t" + str(value) + " (" + str(count[key]) + ")")
     print("\nTotal:" + str(bytecount) + "\n--------------------------------------------")
+    #inputs[3] = (("Results","title"),("Size: "+str(bytecount),"label"))
+    ctypes.windll.user32.MessageBoxA(0, "Size: " + str(bytecount), "Program Size", 1)
