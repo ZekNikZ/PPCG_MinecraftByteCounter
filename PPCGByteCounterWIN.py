@@ -1,7 +1,5 @@
 from pymclevel import TAG_Byte, TAG_Short, TAG_Int, TAG_Compound, TAG_List, TAG_String, TAG_Double, TAG_Float
 import operator
-import ctypes
-
 displayName = "PPCG.SE Minecraft Byte Counter"
 
 t1 = (1, 1, 5)
@@ -142,7 +140,7 @@ def perform(level, box, options):
         "Torch": 0
     }
     bytecount = 0
-    print("--------------------------------------------\nPPCG.SE Minecraft Byte Counter\nby GamrCorps\n--------------------------------------------\n")
+    print("--------------------------------------------\nPPCG.SE Minecraft Program Size Counter\nby GamrCorps\n--------------------------------------------\n")
     for x in xrange(box.minx, box.maxx):
         for y in xrange(box.miny, box.maxy):
             for z in xrange(box.minz, box.maxz):
@@ -253,5 +251,3 @@ def perform(level, box, options):
     for key, value in sorted(blockcount.items(), key=operator.itemgetter(1), reverse = True):
         print(key + ":\t" + str(value) + " (" + str(count[key]) + ")")
     print("\nTotal:" + str(bytecount) + "\n--------------------------------------------")
-    #inputs[3] = (("Results","title"),("Size: "+str(bytecount),"label"))
-    ctypes.windll.user32.MessageBoxA(0, "Size: " + str(bytecount), "Program Size", 1)
