@@ -1,6 +1,6 @@
 from pymclevel import TAG_Byte, TAG_Short, TAG_Int, TAG_Compound, TAG_List, TAG_String, TAG_Double, TAG_Float
 import operator
-import EasyDialogs
+import albow
 
 displayName = "PPCG.SE Minecraft Byte Counter"
 
@@ -249,4 +249,4 @@ def perform(level, box, options):
                     bytecount += options["Entity"]
                     count["Entities"] += options["Entity"]
                     blockcount["Entities"] += 1
-    EasyDialogs.Message("Size: " + str(bytecount))
+    albow.dialogs.alert("Size: " + str(bytecount))
